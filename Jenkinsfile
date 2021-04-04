@@ -20,12 +20,12 @@ pipeline {
               }
          }
       }
-	  stage('Building decode image') {
+      stage('Building decode image') {
           steps{
               script {
                   cd ./decode
-				  dockerImage2 = docker.build registry2 + ":$BUILD_NUMBER"
-				  cd ..
+		  dockerImage2 = docker.build registry2 + ":$BUILD_NUMBER"
+		  cd ..
               }
          }
       }
@@ -39,12 +39,14 @@ pipeline {
               }
           }
       }
-	  stage('Push decode image to DockerHub') {
+      stage('Push decode image to DockerHub') {
           steps{
               script {
                   docker.withRegistry( 'registry2', registryCredential ) {
-                      dockerImage2.push()
-		      dockerImage2.push('latest') 
+                      cd ./decode
+		      dockerImage2.push()
+		      dockerImage2.push('latest')
+		      cd ..
                   }
               }
           }
