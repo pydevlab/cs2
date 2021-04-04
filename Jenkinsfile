@@ -1,10 +1,10 @@
 pipeline {
   environment {
       registry = "pydevlab/caesar_cipher"
-	  registry2 = "pydevlab/caesar_cipher_decode"
+      registry2 = "pydevlab/caesar_cipher_decode"
       registryCredential = 'dockerhub-cred'
       dockerImage = ''
-	  dockerImage2 = ''
+      dockerImage2 = ''
   }
   agent any
   stages {
@@ -44,8 +44,8 @@ pipeline {
               script {
                   docker.withRegistry( '', registryCredential ) {
 	              sh "cd ./decode"
-                      dockerImage.push()
-		      dockerImage.push('latest')
+                      dockerImage2.push()
+		      dockerImage2.push('latest')
 		      sh "cd .."
                   }
               }
