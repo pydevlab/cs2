@@ -23,9 +23,9 @@ pipeline {
       stage('Building decode image') {
           steps{
               script {
-                  cd ./decode
+                  sh "cd ./decode"
 		  dockerImage2 = docker.build registry2 + ":$BUILD_NUMBER"
-		  cd ..
+		  sd "cd .."
               }
          }
       }
@@ -43,10 +43,10 @@ pipeline {
           steps{
               script {
                   docker.withRegistry( '', registryCredential ) {
-	              cd ./decode
+	              sh "cd ./decode"
                       dockerImage.push()
 		      dockerImage.push('latest')
-		      cd ..
+		      sh "cd .."
                   }
               }
           }
