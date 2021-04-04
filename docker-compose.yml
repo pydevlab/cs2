@@ -1,0 +1,14 @@
+version: '2'
+services:
+  webapp_encode:
+    image: pydevlab/caesar_cipher:latest
+    ports:
+      - "80:8000"
+    restart: always
+  webapp_decode:
+    image: pydevlab/caesar_cipher_decode:latest
+    ports:
+      - "8081:8000"
+    restart: always
+    depends_on:
+      - webapp_encode
