@@ -22,11 +22,11 @@ pipeline {
       }
       stage('Building decode image') {
           steps{
+	      sh "cd $WORKSPACE/decode"
               script {
-                  sh "cd $WORKSPACE/decode"
-		  dockerImage2 = docker.build registry2 + ":$BUILD_NUMBER"
-		  sh "cd $WORKSPACE"
-              }
+                  dockerImage2 = docker.build registry2 + ":$BUILD_NUMBER"
+	      }
+	      sh "cd $WORKSPACE"
          }
       }
       stage('Push encode image to DockerHub') {
@@ -41,14 +41,14 @@ pipeline {
       }
       stage('Push decode image to DockerHub') {
           steps{
+	      sh "cd $WORKSPACE/decode"
               script {
                   docker.withRegistry( '', registryCredential ) {
-	              sh "cd $WORKSPACE/decode"
-                      dockerImage2.push()
+	              dockerImage2.push()
 		      dockerImage2.push('latest')
-		      sh "cd $WORKSPACE"
-                  }
+		  }
               }
+	      sh "cd $WORKSPACE"	  
           }
       }
       stage('Deploy to staging') {
