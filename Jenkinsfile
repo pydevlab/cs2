@@ -42,10 +42,10 @@ pipeline {
       stage('Push decode image to DockerHub') {
           steps{
               script {
-                  docker.withRegistry( 'registry2', registryCredential ) {
-                      cd ./decode
-		      dockerImage2.push()
-		      dockerImage2.push('latest')
+                  docker.withRegistry( '', registryCredential ) {
+	              cd ./decode
+                      dockerImage.push()
+		      dockerImage.push('latest')
 		      cd ..
                   }
               }
