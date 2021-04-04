@@ -10,7 +10,7 @@ pipeline {
   stages {
       stage('Cloning git repository') {
           steps {
-              git branch: 'main', url: 'https://github.com/pydevlab/caesar_cipher.git'
+              git branch: 'main', url: 'https://github.com/pydevlab/cs2.git'
           }
       }
       stage('Building encode image') {
