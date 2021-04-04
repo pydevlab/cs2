@@ -25,7 +25,7 @@ pipeline {
               script {
                   sh "cd ./decode"
 		  dockerImage2 = docker.build registry2 + ":$BUILD_NUMBER"
-		  sd "cd .."
+		  sh "cd .."
               }
          }
       }
